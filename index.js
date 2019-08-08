@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const channel = require('./router/messageChannel.js');
-const botToken = require('./config/mirkosSekrets.js').botToken;
+// const botToken = require('./config/mirkosSekrets.js').botToken;
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -17,4 +17,4 @@ client.on('message', async msg => {
   }
 });
 
-client.login(botToken);
+client.login(process.env.BOT_TOKEN);

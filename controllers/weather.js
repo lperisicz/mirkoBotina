@@ -1,11 +1,10 @@
-const apiKey = require('../config/mirkosSekrets.js').weatherApiKey;
 const axios = require('axios');
 const getWeather = msg => {
     let city = msg.content.replace("!weatherNow ", "");
     axios.get(`http://api.openweathermap.org/data/2.5/weather`, {
         params: {
             q: city,
-            appid: apiKey,
+            appid: process.env.WEATHER_API_KEY,
             units: 'metric'
         }
     })
