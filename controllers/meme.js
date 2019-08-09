@@ -60,7 +60,8 @@ const getRandomMeme = (msg) => {
 const getRandomGif = msg => {
     let keys = msg.content.split(" ");
     let subreddit = keys[1] ? keys[1] : 'gif';
-    let limit = keys[2] ? keys[2] : 50;
+    let limit = keys[2] ? keys[2] : 10;
+    if(keys[3]) after = '';
     let found = false;
     axios.get(`https://www.reddit.com/r/${subreddit}.json`, {
         params: {
@@ -78,7 +79,9 @@ const getRandomGif = msg => {
                                     if (post.data.preview.images[0].variants) {
                                         if (post.data.preview.images[0].variants.gif) {
                                             found = true;
-                                            msg.reply(post.data.preview.images[0].variants.gif.source.url)
+                                            msg.reply(post.data.preview.images[0].variants.gif.source.url);
+                                            after = res.data.data.children[res.data.data.children.length - 1].data.name
+                                            msg.reply(after);
                                         }
                                     }
                                 }
@@ -86,15 +89,15 @@ const getRandomGif = msg => {
                         }
                     }
                 }
-            )
+            );
+            if (!found) {
+                msg.channel.send('There is no gif')
+            }
         }
     ).catch((error) => {
         console.error(error);
         msg.channel.send(error.message)
     });
-    if(!found) {
-        msg.reply('There is no gif')
-    }
 };
 
 module.exports = {
