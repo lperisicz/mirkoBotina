@@ -88,7 +88,6 @@ const getRandomGif = msg => {
                                                 }
                                             });
                                             after = res.data.data.children[res.data.data.children.length - 1].data.name;
-                                            msg.reply(after);
                                         }
                                     }
                                 }
