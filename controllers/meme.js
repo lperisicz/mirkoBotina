@@ -80,7 +80,7 @@ const getRandomGif = msg => {
                                         if (post.data.preview.images[0].variants.gif) {
                                             found = true;
                                             msg.reply(post.data.preview.images[0].variants.gif.source.url);
-                                            after = res.data.data.children[res.data.data.children.length - 1].data.name
+                                            after = res.data.data.children[res.data.data.children.length - 1].data.name;
                                             msg.reply(after);
                                         }
                                     }
