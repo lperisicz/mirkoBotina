@@ -69,16 +69,16 @@ const getRandomGif = msg => {
         }
     }).then((res) => {
             console.log(res);
-            res.data.children.forEach(
+            res.data.data.children.forEach(
                 post => {
                     if (!found) {
-                        if (post.data.preview) {
-                            if (post.data.preview.images[0]) {
-                                if (post.data.preview.images[0]) {
-                                    if (post.data.preview.images[0].variants) {
-                                        if (post.data.preview.images[0].variants.gif) {
+                        if (post.data.data.preview) {
+                            if (post.data.data.preview.images[0]) {
+                                if (post.data.data.preview.images[0]) {
+                                    if (post.data.data.preview.images[0].variants) {
+                                        if (post.data.data.preview.images[0].variants.gif) {
                                             found = true;
-                                            msg.reply(post.data.preview.images[0].variants.gif.source.url)
+                                            msg.reply(post.data.data.preview.images[0].variants.gif.source.url)
                                         }
                                     }
                                 }
