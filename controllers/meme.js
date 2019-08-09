@@ -1,6 +1,7 @@
 const https = require('https');
 const axios = require('axios');
 let after = '';
+let afters = {};
 
 const router = {
     randomMeme: msg => {
@@ -60,8 +61,16 @@ const getRandomMeme = (msg) => {
 const getRandomGif = msg => {
     let keys = msg.content.split(" ");
     let subreddit = keys[1] ? keys[1] : 'gif';
-    let limit = keys[2] ? keys[2] : 10;
-    if(keys[3]) after = '';
+    let limit = keys[2] ? keys[2] : 20;
+    if (keys[3]) {
+        after = '';
+    } else {
+        if (!afters[subreddit]) {
+            after = '';
+        } else {
+            after = afters[subreddit]
+        }
+    }
     let found = false;
     axios.get(`https://www.reddit.com/r/${subreddit}.json`, {
         params: {
@@ -88,6 +97,8 @@ const getRandomGif = msg => {
                                                 }
                                             });
                                             after = res.data.data.children[res.data.data.children.length - 1].data.name;
+                                            afters[subreddit] = after;
+                                            console.log(afters)
                                         }
                                     }
                                 }
@@ -114,7 +125,8 @@ module.exports = {
     },
 
     help: () => {
-        return '!randomMeme ?SUBREDDIT: random meme generator\n'
+        return '!randomMeme ?SUBREDDIT: random meme generator\n' +
+        '!randomGif ?SUBREDDIT ?LIMIT ?restart: random gif generator\n'
     }
 
 };
