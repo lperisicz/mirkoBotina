@@ -79,7 +79,14 @@ const getRandomGif = msg => {
                                     if (post.data.preview.images[0].variants) {
                                         if (post.data.preview.images[0].variants.gif) {
                                             found = true;
-                                            msg.reply(post.data.preview.images[0].variants.gif.source.url);
+                                            msg.channel.send({
+                                                embed: {
+                                                    title: post.data.title,
+                                                    image: {
+                                                        url: post.data.preview.images[0].variants.gif.source.url
+                                                    }
+                                                }
+                                            });
                                             after = res.data.data.children[res.data.data.children.length - 1].data.name;
                                             msg.reply(after);
                                         }
