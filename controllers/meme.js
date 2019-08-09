@@ -1,8 +1,9 @@
 const https = require('https');
+const axios = require('axios');
+let after = '';
 
 const router = {
-
-    randomMeme: (msg) => {
+    randomMeme: msg => {
         let key = msg.content.split(" ")[1];
         try {
             https.get(`https://meme-api.herokuapp.com/gimme${key ? `/` + key : ''}`, (resp) => {
@@ -34,7 +35,7 @@ const router = {
         }
     },
 
-    help: (msg) => {
+    help: msg => {
         msg.channel.send('RANDOM MEMZ GENERATOR GUIDE: \n' +
             '!randomMeme ----> By default the API grabs a random\n' +
             ' meme from \'memes\', \'dankmemes\', \'meirl\', \n' +
@@ -43,12 +44,11 @@ const router = {
             'passed subreddit\n ' +
             '!randomMeme help returns help guide')
     }
-
 };
 
 const getRandomMeme = (msg) => {
     let keys = msg.content.split(" ");
-    if(keys[0]) {
+    if (keys[0]) {
         if (keys[1] === 'help') {
             router.help(msg)
         } else {
@@ -57,12 +57,55 @@ const getRandomMeme = (msg) => {
     }
 };
 
+const getRandomGif = msg => {
+    let keys = msg.content.split(" ");
+    let subreddit = keys[1] ? keys[1] : 'gif';
+    let limit = keys[2] ? keys[2] : 50;
+    let found = false;
+    axios.get(`https://www.reddit.com/r/${subreddit}.json`, {
+        params: {
+            limit: limit,
+            after: after
+        }
+    }).then((res) => {
+            console.log(res);
+            res.data.children.forEach(
+                post => {
+                    if (!found) {
+                        if (post.data.preview) {
+                            if (post.data.preview.images[0]) {
+                                if (post.data.preview.images[0]) {
+                                    if (post.data.preview.images[0].variants) {
+                                        if (post.data.preview.images[0].variants.gif) {
+                                            found = true;
+                                            msg.reply(post.data.preview.images[0].variants.gif.source.url)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            )
+        }
+    ).catch((error) => {
+        console.error(error);
+        msg.channel.send(error.message)
+    });
+    if(!found) {
+        msg.reply('There is no gif')
+    }
+};
+
 module.exports = {
 
     routes: {
-        '!randomMeme': msg => getRandomMeme(msg)
+        '!randomMeme': msg => getRandomMeme(msg),
+        '!randomGif': msg => getRandomGif(msg)
     },
 
-    help: () => { return '!randomMeme ?SUBREDDIT: random meme generator\n'}
+    help: () => {
+        return '!randomMeme ?SUBREDDIT: random meme generator\n'
+    }
 
 };
