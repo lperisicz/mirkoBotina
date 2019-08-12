@@ -2,6 +2,7 @@ const https = require('https');
 const axios = require('axios');
 let after = '';
 let afters = {};
+let limit = 50;
 
 const router = {
     randomMeme: msg => {
@@ -61,7 +62,7 @@ const getRandomMeme = (msg) => {
 const getRandomGif = msg => {
     let keys = msg.content.split(" ");
     let subreddit = keys[1] ? keys[1] : 'gif';
-    let limit = keys[2] ? keys[2] : 20;
+    limit = keys[2] ? keys[2] : limit;
     if (keys[3]) {
         after = '';
     } else {
