@@ -20,11 +20,7 @@ const tellJoke = (msg) => {
 const tellDadJoke = msg => {
     axios.get(`https://icanhazdadjoke.com`, {})
         .then((res) => {
-            msg.channel.send({
-                embed: {
-                    title: res.data.joke
-                }
-            })
+            msg.channel.send(res.data.joke)
         })
         .catch((error) => {
             console.error(error);
@@ -41,7 +37,7 @@ module.exports = {
 
     help: () => {
         return '\n!chuckJoke: random Chuck Norris Joke\n' +
-        '!dadJoke: random Dad Joke\n';
+            '!dadJoke: random Dad Joke\n';
     }
 
 };
