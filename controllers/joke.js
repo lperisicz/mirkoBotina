@@ -1,4 +1,5 @@
 const https = require('http');
+const axios = require('axios');
 
 const tellJoke = (msg) => {
     https.get('http://api.icndb.com/jokes/random', (resp) => {
@@ -16,14 +17,31 @@ const tellJoke = (msg) => {
     });
 };
 
+const tellDadJoke = msg => {
+    axios.get(`https://icanhazdadjoke.com`, {})
+        .then((res) => {
+            msg.channel.send({
+                embed: {
+                    title: res.data.joke
+                }
+            })
+        })
+        .catch((error) => {
+            console.error(error);
+            msg.channel.send(error.message)
+        })
+};
+
 module.exports = {
 
     routes: {
         '!chuckJoke': msg => tellJoke(msg),
+        '!dadJoke': tellDadJoke
     },
 
     help: () => {
-        return '\n!chuckJoke: random Chuck Norris Joke\n';
+        return '\n!chuckJoke: random Chuck Norris Joke\n' +
+        '!dadJoke: random Dad Joke\n';
     }
 
 };

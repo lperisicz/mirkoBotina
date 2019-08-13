@@ -9,7 +9,7 @@ const helps = [
     (require('../controllers/idea.js')).help,
     (require('../controllers/weather.js')).help,
     (require('../controllers/code.js')).help,
-    (require('../controllers/chuckJoke.js')).help
+    (require('../controllers/joke.js')).help
 ];
 
 const router = {
@@ -23,7 +23,7 @@ const router = {
     ...(require('../controllers/idea.js')).routes,
     ...(require('../controllers/weather.js')).routes,
     ...(require('../controllers/code.js')).routes,
-    ...(require('../controllers/chuckJoke.js')).routes,
+    ...(require('../controllers/joke.js')).routes,
     '!help': (msg) => {
         let message = '';
         helps.forEach(
