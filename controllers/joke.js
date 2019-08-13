@@ -18,7 +18,11 @@ const tellJoke = (msg) => {
 };
 
 const tellDadJoke = msg => {
-    axios.get(`https://icanhazdadjoke.com`, {})
+    axios.get(`https://icanhazdadjoke.com(`, {
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
         .then((res) => {
             msg.channel.send(res.data);
             console.log(res.data);
