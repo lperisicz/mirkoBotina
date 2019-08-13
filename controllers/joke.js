@@ -20,7 +20,7 @@ const tellJoke = (msg) => {
 const tellDadJoke = msg => {
     axios.get(`https://icanhazdadjoke.com`, {})
         .then((res) => {
-            msg.channel.send(res.data.joke)
+            msg.channel.send(res.data)
         })
         .catch((error) => {
             console.error(error);
