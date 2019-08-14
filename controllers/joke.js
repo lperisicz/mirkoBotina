@@ -33,16 +33,30 @@ const tellDadJoke = msg => {
         })
 };
 
+const tellRandomJoke = msg => {
+    axios.get(`https://official-joke-api.appspot.com/jokes/random`, {})
+        .then((res) => {
+            msg.channel.send(res.data.setup + '\n' + res.data.punchline);
+            console.log(res.data);
+        })
+        .catch((error) => {
+            console.error(error);
+            msg.channel.send(error.message)
+        })
+};
+
 module.exports = {
 
     routes: {
         '!chuckJoke': msg => tellJoke(msg),
-        '!dadJoke': tellDadJoke
+        '!dadJoke': tellDadJoke,
+        '!randomJoke': tellRandomJoke,
     },
 
     help: () => {
         return '\n!chuckJoke: random Chuck Norris Joke\n' +
-            '!dadJoke: random Dad Joke\n';
+            '!dadJoke: random Dad Joke\n' +
+            '!randomJoke: random punchline Joke\n';
     }
 
 };
