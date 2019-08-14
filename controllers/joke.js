@@ -24,7 +24,7 @@ const tellDadJoke = msg => {
         }
     })
         .then((res) => {
-            msg.channel.send(res.data);
+            msg.channel.send(res.data.joke);
             console.log(res.data);
         })
         .catch((error) => {
