@@ -45,18 +45,32 @@ const tellRandomJoke = msg => {
         })
 };
 
+const tellYoMamaJoke = msg => {
+    axios.get(`https://api.yomomma.info`, {})
+        .then((res) => {
+            msg.channel.send(res.data.joke);
+            console.log(res.data);
+        })
+        .catch((error) => {
+            console.error(error);
+            msg.channel.send(error.message)
+        })
+};
+
 module.exports = {
 
     routes: {
         '!chuckJoke': msg => tellJoke(msg),
         '!dadJoke': tellDadJoke,
         '!randomJoke': tellRandomJoke,
+        '!yoMama': tellYoMamaJoke,
     },
 
     help: () => {
         return '\n!chuckJoke: random Chuck Norris Joke\n' +
             '!dadJoke: random Dad Joke\n' +
-            '!randomJoke: random punchline Joke\n';
+            '!randomJoke: random punchline Joke\n' +
+            '!yoMama: random yoMama joke, currently 101 joke in database\n';
     }
 
 };
