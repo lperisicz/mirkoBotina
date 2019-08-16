@@ -1,7 +1,7 @@
 const axios = require('axios');
 const getInsult = msg => {
     let name = msg.content.replace("!insult ", "");
-    axios.get(`https://evilinsult.com/generate_insult.php?lang=en&type=json`, {})
+    axios.get(`https://evilinsult.com/generate_insult.php?type=plain&lang=en&_=1565950876793&type=json`, {})
         .then((res) => {
             msg.channel.send(name + " " + res.data.insult)
         })
