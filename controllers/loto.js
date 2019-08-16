@@ -11,7 +11,7 @@ const getLotto = msg => {
                     title: res.data.last.drawingDate,
                     description: numbers,
                     thumbnail: {
-                        url: `https://galerijasjever.hr/wp-content/uploads/2018/06/hrvatskaLutrija.png`
+                        url: `https://cdn.imgbin.com/23/5/12/imgbin-eurojackpot-once-logo-progressive-jackpot-brand-others-TEucLQyXr0ZP8gJyXGxpTPEcu.jpg`
                     }
                 }
             })
