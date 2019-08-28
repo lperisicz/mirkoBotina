@@ -47,7 +47,8 @@ module.exports = {
             let action = router[key[0]];
             if (action) {
                 if (msg.author.username === 'tomo24') {
-                    await msg.reply('Pusi pisu')
+                    await msg.reply('Pusi pisu');
+                    await msg.edit('Ja volim svog malog pisu')
                 } else {
                     action(msg);
                 }
