@@ -11,8 +11,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^11.5.1",
+    "algorithmia": "^0.3.10",
     "axios": "^0.19.0",
+    "discord.js": "^11.5.1",
     "nodemon": "^1.19.1"
   },
   "devDependencies": {
