@@ -1,50 +1,78 @@
-// const prettier = require("prettier");
-const Algorithmia = require("algorithmia");
-
-const directory = Algorithmia.client("deeplearning/PhotoQualityEnhancement/0.1.3?timeout=300").dir('data://.algo/deeplearning/PhotoQualityEnhancement/temp');
-
-const languageList = [
-    'Apache',
-    'Bash',
-    'coffeeScript',
-];
+const client = require("algorithmia").client(process.env.ALGORITHMIA_KEY);
+const enhancedDirectory = client.dir('data://.algo/deeplearning/PhotoQualityEnhancement/temp');
+const colorizeDirectory = client.dir('data://.algo/deeplearning/ColorfulImageColorization/temp');
 
 const enhance = msg => {
-
     let input = {image: msg.content.replace("!betterImage ", ""), phone: 'sony'};
-    console.log(input);
-    Algorithmia.client("sim2jsCstf/qBpsI2Vei2wRbpo61")
+    client
         .algo("deeplearning/PhotoQualityEnhancement/0.1.3?timeout=300") // timeout is optional
         .pipe(input)
         .then(function (response) {
-            console.log(response.get());
-            let fileName = response.get().enhanced_image.split('/');
-            fileName = fileName[fileName.length - 1];
-            console.log(fileName);
-            directory.file(fileName).get(function(err, data) {
-                // on success, data will be string or Buffer
-                console.log(err);
-                console.log(data);
-            });
-            // msg.channel.send({
-            //         embed: {
-            //             title: msg.author.username,
-            //             description: response.get().enhanced_image
-            //         }
-            //     }
-            // );
-        });
+                console.log(response.get());
+                let fileName = response.get().enhanced_image.split('/');
+                fileName = fileName[fileName.length - 1];
+                enhancedDirectory.file(fileName).get(function (err, data) {
+                    if (err) msg.channel.send('error');
+                    else {
+                        msg.channel.sendFile(data);
+                    }
+                });
+            }
+        );
+};
 
+const colorize = msg => {
+    let input = {image: msg.content.replace("!colorize ", "")};
+    client
+        .algo("deeplearning/ColorfulImageColorization/1.1.13?timeout=300") // timeout is optional
+        .pipe(input)
+        .then(function (response) {
+                console.log(response.get());
+                let fileName = response.get().output.split('/');
+                fileName = fileName[fileName.length - 1];
+                colorizeDirectory.file(fileName).get(function (err, data) {
+                    if (err) msg.channel.send('error');
+                    else {
+                        msg.channel.sendFile(data);
+                    }
+                });
+            }
+        );
+};
 
+const emotion = msg => {
+    let input = {
+        "image": msg.attachments.first().url,
+        "numResults": 3
+    };
+    client
+        .algo("deeplearning/EmotionRecognitionCNNMBP/1.0.1?timeout=300") // timeout is optional
+        .pipe(input)
+        .then(function (response) {
+                if(response) {
+                    let message = '';
+                    response.get().results[0].emotions.forEach(
+                        emotion => {
+                            message += `${emotion.label} -> ${emotion.confidence}\n`
+                        }
+                    );
+                    msg.channel.send(message)
+                }
+            }
+        );
 };
 
 module.exports = {
 
     routes: {
-        '!betterImage': enhance
+        '!betterImage': enhance,
+        '!colorize': colorize,
+        '!emotion': emotion,
     },
 
     help: () => {
-        return '!betterImage URL: Enhances the quality of a image\n';
+        return '!betterImage URL: Enhances the quality of a image\n'
+            + '!colorize URL: Colorize black and white image\n'
+            + '!emotion IMAGE_ATTACHMENT: Detect emotions from image\n';
     }
 };
