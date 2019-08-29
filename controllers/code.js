@@ -1,3 +1,10 @@
+const languageList = [
+    'Apache',
+    'Bash',
+    'coffeeScript',
+];
+const prettier = require("prettier");
+
 const formatMessage = msg => {
 
     var Algorithmia = require("algorithmia");
@@ -8,10 +15,15 @@ const formatMessage = msg => {
         .pipe(input)
         .then(function(response) {
             console.log(response.get());
+
+            let formattedCode = prettier.format(input);
+
+            //response.get().toString()
+
             msg.channel.send({
                     embed: {
                         title: msg.author.username,
-                        description: response.get().toString()
+                        description: "```xml\n" + formattedCode + "```"
                     }
                 }
             );
