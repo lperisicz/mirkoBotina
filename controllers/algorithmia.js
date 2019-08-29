@@ -1,7 +1,7 @@
 // const prettier = require("prettier");
 const Algorithmia = require("algorithmia");
 
-const directory = Algorithmia.client().algo("deeplearning/PhotoQualityEnhancement/0.1.3?timeout=300").dir('data://.algo/deeplearning/PhotoQualityEnhancement/temp');
+const directory = Algorithmia.client("deeplearning/PhotoQualityEnhancement/0.1.3?timeout=300");
 
 const languageList = [
     'Apache',
