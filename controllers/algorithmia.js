@@ -20,8 +20,10 @@ const enhance = msg => {
             console.log(response.get());
             let fileName = response.get().enhanced_image.split('/');
             fileName = fileName[fileName.length - 1];
+            console.log(fileName);
             directory.file(fileName).get(function(err, data) {
                 // on success, data will be string or Buffer
+                console.log(err);
                 console.log(data);
             });
             // msg.channel.send({
