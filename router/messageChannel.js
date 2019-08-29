@@ -12,6 +12,7 @@ const helps = [
     (require('../controllers/joke.js')).help,
     (require('../controllers/loto.js')).help,
     (require('../controllers/insult.js')).help,
+    (require('../controllers/algorithmia.js')).help,
 ];
 
 const router = {
@@ -28,6 +29,7 @@ const router = {
     ...(require('../controllers/joke.js')).routes,
     ...(require('../controllers/loto.js')).routes,
     ...(require('../controllers/insult.js')).routes,
+    ...(require('../controllers/algorithmia.js')).routes,
     '!help': (msg) => {
         let message = '';
         helps.forEach(
