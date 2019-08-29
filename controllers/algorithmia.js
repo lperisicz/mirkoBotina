@@ -9,7 +9,7 @@ const languageList = [
 
 const enhance = msg => {
 
-    let input = {image: msg.content.replace("!betterImage ", "")};
+    let input = {image: msg.content.replace("!betterImage ", ""), phone: 'sony'};
     console.log(input);
     Algorithmia.client("sim2jsCstf/qBpsI2Vei2wRbpo61")
         .algo("deeplearning/PhotoQualityEnhancement/0.1.3?timeout=300") // timeout is optional
