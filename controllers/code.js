@@ -9,11 +9,12 @@ const formatMessage = msg => {
 
     var Algorithmia = require("algorithmia");
 
-    var input = prettier.format(msg.content.replace("!code ", ""));
+    var input = prettier.format(msg.content.replace("!code ", ""), {parser: 'babel'});
+
     Algorithmia.client("sim2jsCstf/qBpsI2Vei2wRbpo61")
         .algo("PetiteProgrammer/ProgrammingLanguageIdentification/0.1.3?timeout=300") // timeout is optional
         .pipe(input)
-        .then(function(response) {
+        .then(function (response) {
             console.log(response.get());
 
             //.toString()
