@@ -1,6 +1,12 @@
-
 const formatMessage = msg => {
-    msg.channel.send(msg.content.replace("!code ", ""), {code: 'Java'});
+    msg.channel.send({
+            embed: {
+                title: msg.author.username,
+                description: msg.content.replace("!code ", "")
+            }
+        },
+        {code: 'Java'}
+    );
 };
 
 module.exports = {
