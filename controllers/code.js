@@ -2,7 +2,7 @@ const formatMessage = msg => {
     msg.channel.send({
             embed: {
                 title: msg.author.username,
-                description: "```" + msg.content.replace("!code ", "") + "```"
+                description: "```js\n" + msg.content.replace("!code ", "") + "```"
             }
         }
     );
