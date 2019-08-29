@@ -18,7 +18,7 @@ const enhance = msg => {
         .pipe(input)
         .then(function (response) {
             console.log(response.get());
-            let fileName = response.get().enhaced_image.split('/');
+            let fileName = response.get().enhanced_image.split('/');
             fileName = fileName[fileName.length - 1];
             directory.file(fileName).get(function(err, data) {
                 // on success, data will be string or Buffer
