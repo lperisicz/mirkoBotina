@@ -65,7 +65,7 @@ const emotion = msg => {
 const swapFaces = msg => {
     let links = msg.content.replace('!swapFaces ', '').split(' ');
     let imageOne = links[0];
-    let imageTwo = links[0];
+    let imageTwo = links[1];
     console.log(imageOne);
     console.log(imageTwo);
 
