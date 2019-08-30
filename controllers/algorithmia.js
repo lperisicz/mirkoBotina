@@ -49,7 +49,7 @@ const emotion = msg => {
         .algo("deeplearning/EmotionRecognitionCNNMBP/1.0.1?timeout=300") // timeout is optional
         .pipe(input)
         .then(function (response) {
-                if(response) {
+                if (response) {
                     let message = '';
                     response.get().results[0].emotions.forEach(
                         emotion => {
@@ -69,6 +69,13 @@ const swapFaces = msg => {
     console.log(imageOne);
     console.log(imageTwo);
 
+    let input = {images: [{url: imageOne}, {url: imageTwo}]};
+
+    client.algo("dlib/FaceDetection/0.2.1?timeout=300") // timeout is optional
+        .pipe(input)
+        .then(function(response) {
+            console.log(response.get());
+        });
 };
 
 module.exports = {
