@@ -45,17 +45,10 @@ const deleteMsgKeys = [
 
 module.exports = {
     onMessageReceived: async (msg) => {
-            let key = msg.content.split(" ");
-            let action = router[key[0]];
-            if (action) {
-                if (msg.author.username === 'tomo24') {
-                    await msg.reply('Pusi pisu');
-                    await msg.edit('Ja volim svog malog pisu')
-                } else {
-                    action(msg);
-                }
-            }
-            if (deleteMsgKeys.includes(key[0])) await msg.delete(1000)
+        let key = msg.content.split(" ");
+        let action = router[key[0]];
+        if (action) action(msg);
+        if (deleteMsgKeys.includes(key[0])) await msg.delete(1000)
 
     }
 };
