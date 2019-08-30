@@ -1,4 +1,5 @@
 const client = require("algorithmia").client(process.env.ALGORITHMIA_KEY);
+const axios = require('axios');
 const enhancedDirectory = client.dir('data://.algo/deeplearning/PhotoQualityEnhancement/temp');
 const colorizeDirectory = client.dir('data://.algo/deeplearning/ColorfulImageColorization/temp');
 
@@ -75,7 +76,16 @@ const swapFaces = msg => {
         .pipe(input)
         .then(function(response) {
             console.log(response.get());
+            swapFaceCanvases(response.get().images, msg)
         });
+};
+
+const swapFaceCanvases = (images, msg) => {
+    axios.get(images[0].url, {responseType: 'arrayBuffer'}).then(
+        response => {
+            msg.channel.sendFile(response.data);
+        }
+    )
 };
 
 module.exports = {

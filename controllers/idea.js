@@ -1,4 +1,4 @@
-const axios = require('axios')
+const axios = require('axios');
 const randomName = msg => {
     axios.get(`http://itsthisforthat.com/api.php?text`)
         .then((res) => {
