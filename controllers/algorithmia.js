@@ -122,6 +122,7 @@ module.exports = {
     help: () => {
         return '!betterImage URL: Enhances the quality of a image\n'
             + '!colorize URL: Colorize black and white image\n'
-            + '!emotion IMAGE_ATTACHMENT: Detect emotions from image\n';
+            + '!emotion IMAGE_ATTACHMENT: Detect emotions from image\n'
+            + '!swapFaces FIRST_IMAGE_URL SECOND_IMAGE_URL: Attach face from second image to face on first image\n';
     }
 };
