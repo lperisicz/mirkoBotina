@@ -40,7 +40,8 @@ const router = {
 };
 
 const deleteMsgKeys = [
-    "!code"
+    "!code",
+    '!swapFaces'
 ];
 
 module.exports = {
