@@ -11,6 +11,8 @@ module.exports = {
 
         '!mirko': (msg) => msg.reply("Recite kolega"),
 
+        '!dajSeOdluciViseJeboGaJa': (msg) => msg.reply("A tu sam kolega jebo ga lebac"),
+
         '!sve': (msg) => msg.channel.send('aaaaaa')
     },
 
