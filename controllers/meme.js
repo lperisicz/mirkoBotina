@@ -118,16 +118,40 @@ const getRandomGif = msg => {
     });
 };
 
+const gif = msg => {
+    //https://api.tenor.com/v1/registershare?id=8776030&key=LIVDSRZULELA&q=excited
+    let key = msg.content.replace('!gif ', '');
+    axios.get(`https://api.tenor.com/v1/search?q=${key}&key=${process.env.TENOR}&limit=50`, {}).then((res) => {
+            console.log(res);
+            if (res.data && res.data.results) {
+                let url = res.data.results[Math.floor(Math.random() * 50)].media[0].gif.url;
+                msg.channel.send({
+                    embed: {
+                        image: {
+                            url: url
+                        }
+                    }
+                });
+            }
+        }
+    ).catch((error) => {
+        console.error(error);
+        msg.channel.send(error.message)
+    });
+};
+
 module.exports = {
 
     routes: {
         '!randomMeme': msg => getRandomMeme(msg),
-        '!randomGif': msg => getRandomGif(msg)
+        '!randomGif': msg => getRandomGif(msg),
+        '!gif': msg => getRandomGif(msg)
     },
 
     help: () => {
         return '!randomMeme ?SUBREDDIT: random meme generator\n' +
-        '!randomGif ?SUBREDDIT ?LIMIT ?restart: random gif generator\n'
+            '!randomGif ?SUBREDDIT ?LIMIT ?restart: random gif generator\n' +
+            '!gif KEYWOARD search tenor for gif with \n'
     }
 
 };
