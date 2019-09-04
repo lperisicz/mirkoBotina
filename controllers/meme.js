@@ -130,7 +130,7 @@ const gif = msg => {
     }).then((res) => {
             console.log(res);
             if (res.data && res.data.results) {
-                let url = res.data.results[Math.floor(Math.random() * 50)].media[0].gif.url;
+                let url = res.data.results[Math.floor(Math.random() * res.data.results.length)].media[0].gif.url;
                 msg.channel.send({
                     embed: {
                         image: {
