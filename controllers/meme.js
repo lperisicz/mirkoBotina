@@ -145,7 +145,7 @@ module.exports = {
     routes: {
         '!randomMeme': msg => getRandomMeme(msg),
         '!randomGif': msg => getRandomGif(msg),
-        '!gif': msg => getRandomGif(msg)
+        '!gif': msg => gif(msg)
     },
 
     help: () => {
