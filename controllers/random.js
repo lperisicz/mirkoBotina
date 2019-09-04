@@ -21,6 +21,7 @@ module.exports = {
         '!dajGaDajGa: special feature that returns special Mirko\'s song\n' +
         '!mirkojebotekamelkejs: The one and only MirkoLint rules \n' +
         '!mirko: Ofanzivno defanzivni odgovor od mirkeca\n' +
+        '!dajSeOdluciViseJeboGaJa: Ofanzivno defanzivni odgovor od mirkeca broj dva\n' +
         '!sve: A jeeebiga ako je sve onda je sve\n'
     }
 
