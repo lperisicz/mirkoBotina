@@ -121,7 +121,13 @@ const getRandomGif = msg => {
 const gif = msg => {
     //https://api.tenor.com/v1/registershare?id=8776030&key=LIVDSRZULELA&q=excited
     let key = msg.content.replace('!gif ', '');
-    axios.get(`https://api.tenor.com/v1/search?q=${key}&key=${process.env.TENOR}&limit=50`, {}).then((res) => {
+    axios.get(`https://api.tenor.com/v1/search`, {
+        params: {
+            limit: 50,
+            q: key,
+            key: process.env.TENOR
+        }
+    }).then((res) => {
             console.log(res);
             if (res.data && res.data.results) {
                 let url = res.data.results[Math.floor(Math.random() * 50)].media[0].gif.url;
