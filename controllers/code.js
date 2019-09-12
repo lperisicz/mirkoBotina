@@ -16,14 +16,32 @@ const formatMessage = msg => {
         .pipe(input)
         .then(function (response) {
             console.log(response.get());
-            msg.channel.send({
-                    embed: {
-                        title: msg.author.username,
-                        description: "```" + `${response.get()[0][0]}\n` + input + "```"
+            try {
+                msg.channel.send({
+                        embed: {
+                            title: msg.author.username,
+                            description: "```" + `${response.get()[0][0]}\n` + input + "```"
+                        }
                     }
+                );
+            } catch (e) {
+                msg.channel.send({
+                        embed: {
+                            title: msg.author.username,
+                            description: "```" + `java\n` + input + "```"
+                        }
+                    }
+                );
+            }
+        }).catch(e => {
+        msg.channel.send({
+                embed: {
+                    title: msg.author.username,
+                    description: "```" + `java\n` + input + "```"
                 }
-            );
-        });
+            }
+        );
+    });
 
 
 };
