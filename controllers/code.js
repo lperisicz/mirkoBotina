@@ -9,7 +9,7 @@ const languageList = [
 
 const formatMessage = msg => {
 
-    let input = prettier.format(msg.content.replace("!code ", ""), {parser: 'babel'});
+    let input = prettier.format(msg.content.replace("!code ", ""), {parser: 'babel'}) || msg.content.replace("!code ", "");
     console.log(input);
     Algorithmia.client(process.env.ALGORITHMIA_KEY)
         .algo("PetiteProgrammer/ProgrammingLanguageIdentification/0.1.3?timeout=300") // timeout is optional
