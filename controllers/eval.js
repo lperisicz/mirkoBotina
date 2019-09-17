@@ -1,5 +1,5 @@
 const evaluate = msg => {
-
+    msg.send("evaluating")
     let message;
 
     try {
