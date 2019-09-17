@@ -13,6 +13,7 @@ const helps = [
     (require('../controllers/loto.js')).help,
     (require('../controllers/insult.js')).help,
     (require('../controllers/algorithmia.js')).help,
+    (require('../controllers/eval.js')).help,
 ];
 
 const router = {
