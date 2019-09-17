@@ -1,13 +1,13 @@
-const evaluate = msg => {
-    msg.send("evaluating")
+const evaluate = async msg => {
+    await msg.channel.send("evaluating")
     let message;
 
     try {
         message = eval(msg.content.replace('!eval ', ''));
     } catch (e) {
-        msg.send("errorcina svjetska")
+        await msg.channel.send("errorcina svjetska")
     }
-    msg.send(message)
+    await msg.channel.send(message)
 };
 
 module.exports = {
