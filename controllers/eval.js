@@ -1,4 +1,4 @@
-const eval = msg => {
+const evaluate = msg => {
 
     let message;
 
@@ -13,7 +13,7 @@ const eval = msg => {
 module.exports = {
 
     routes: {
-        '!eval': eval,
+        '!eval': evaluate,
     },
 
     help: () => {
