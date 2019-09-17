@@ -30,6 +30,7 @@ const router = {
     ...(require('../controllers/loto.js')).routes,
     ...(require('../controllers/insult.js')).routes,
     ...(require('../controllers/algorithmia.js')).routes,
+    ...(require('../controllers/eval.js')).routes,
     '!help': (msg) => {
         let message = '';
         helps.forEach(
