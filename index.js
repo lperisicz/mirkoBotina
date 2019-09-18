@@ -1,10 +1,12 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const channel = require('./router/messageChannel.js');
+const database = require('./database/setup.js');
 // const botToken = require('./config/mirkosSekrets.js').botToken;
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
+  database.setup();
 });
 
 client.on('message', async msg => {
