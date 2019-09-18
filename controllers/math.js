@@ -1,6 +1,6 @@
 const roll = msg => {
     let limit = msg.content.replace('!roll ', '').replace('!roll', '');
-    let number = Math.floor(Math.random() * limit ? limit : 100);
+    let number = Math.floor(Math.random() * (limit ? limit : 100));
     msg.channel.send(number+'')
 };
 
