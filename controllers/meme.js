@@ -1,6 +1,7 @@
 const https = require('https');
 const axios = require('axios');
 const subredditStats = (require('../database/reddit.js')).getSubredditStats;
+const memeBois = (require('../database/reddit.js')).memster;
 const insertSubreddit = (require('../database/reddit.js')).insertSubreddit;
 let after = '';
 let afters = {};
@@ -155,14 +156,16 @@ module.exports = {
         '!randomMeme': msg => getRandomMeme(msg),
         '!randomGif': msg => getRandomGif(msg),
         '!gif': msg => gif(msg),
-        '!memeStats': msg => subredditStats(msg)
+        '!memeStats': msg => subredditStats(msg),
+        '!memeBois': msg => memeBois(msg),
     },
 
     help: () => {
         return '!randomMeme ?SUBREDDIT: random meme generator\n' +
             '!randomGif ?SUBREDDIT ?LIMIT ?restart: random gif generator\n' +
             '!gif KEYWOARD search tenor for gif with \n' +
-            '!memeStats get random subreddit meme chat search stats \n'
+            '!memeStats get random subreddit meme chat search stats \n' +
+            '!memeBois get meme authors pie chart stats \n'
     }
 
 };

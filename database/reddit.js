@@ -34,6 +34,31 @@ module.exports = {
         client.query(query, (err, res) => {
             console.log(err ? err.stack : res.rows);
         })
+    },
+
+    memster: async msg => {
+        const client = require('../database/setup.js').getClient();
+        let query = `SELECT COUNT(id) as count, author FROM random_meme_subreddits GROUP BY(author) ORDER BY(COUNT(id)) DESC LIMIT 3`;
+
+        client.query(query, (err, res) => {
+            console.log(err ? err.stack : res.rows);
+            if (!err) {
+                let response = `https://quickchart.io/chart?backgroundColor=white&c={type:\'pie\',data:{labels:[`;
+                response += res.rows.map(row => {return `\'${row.author + ` ${`${Math.floor(row.count * 100 / res.rows.length)} %`}`}\'`}).join(',');
+                response += `], datasets:[{data:[${res.rows.map(row => {return row.count})}]}]}}`;
+                if (!err) {
+                    msg.channel.send({
+                        embed: {
+                            image: {
+                                url: encodeURI(response)
+                            }
+                        }
+                    });
+                } else {
+                    msg.channel.send('empty');
+                }
+            }
+        })
     }
 
 };
