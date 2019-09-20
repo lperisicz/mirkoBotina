@@ -1,5 +1,7 @@
 const https = require('https');
 const axios = require('axios');
+const subredditStats = (require('../database/reddit.js')).getSubredditStats;
+const insertSubreddit = (require('../database/reddit.js')).insertSubreddit;
 let after = '';
 let afters = {};
 let limit = 50;
@@ -25,6 +27,7 @@ const router = {
                                 }
                             }
                         })
+                        insertSubreddit(msg, objData.url);
                     } catch (e) {
                         msg.channel.send('SERVER ERROR')
                     }
@@ -151,13 +154,15 @@ module.exports = {
     routes: {
         '!randomMeme': msg => getRandomMeme(msg),
         '!randomGif': msg => getRandomGif(msg),
-        '!gif': msg => gif(msg)
+        '!gif': msg => gif(msg),
+        '!memeStats': msg => subredditStats(msg)
     },
 
     help: () => {
         return '!randomMeme ?SUBREDDIT: random meme generator\n' +
             '!randomGif ?SUBREDDIT ?LIMIT ?restart: random gif generator\n' +
-            '!gif KEYWOARD search tenor for gif with \n'
+            '!gif KEYWOARD search tenor for gif with \n' +
+            '!memeStats get random subreddit meme chat search stats \n'
     }
 
 };
