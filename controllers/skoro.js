@@ -28,8 +28,9 @@ module.exports = {
     },
 
     help: () => {
-        return '!skoro: The one and only prezident \n' +
-            '!skoroFact: Otkad je objavio svoju kandidaturu za predsjednika Republike Hrvatske, zanimanje o svim detaljima bogate biografije Miroslava Škore ne jenjava.t \n';
+        return '***ŠKORO***\n' +
+        '`!skoro: The one and only prezident \n' +
+        '!skoroFact: Otkad je objavio svoju kandidaturu za predsjednika Republike Hrvatske, zanimanje o svim detaljima bogate biografije Miroslava Škore ne jenjava.t \n\n`';
     }
 
 };

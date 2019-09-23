@@ -53,6 +53,7 @@ module.exports = {
     },
 
     help: () => {
-        return '!code CODE: formats passed code\n';
+        return '***CODE (under development)***\n' +
+        '`!code CODE: formats passed code`\n\n';
     }
 };

@@ -11,7 +11,7 @@ client.on('ready', () => {
 
 client.on('message', async msg => {
   try {
-    if (!msg.author.bot || !msg.author.username.includes('vecika')) {
+    if (!msg.author.bot) {
       await channel.onMessageReceived(msg);
     }
   } catch (e) {

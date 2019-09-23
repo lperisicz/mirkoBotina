@@ -67,10 +67,11 @@ module.exports = {
     },
 
     help: () => {
-        return '\n!chuckJoke: random Chuck Norris Joke\n' +
+        return '***JOKES***\n' +
+            '`!chuckJoke: random Chuck Norris Joke\n' +
             '!dadJoke: random Dad Joke\n' +
             '!randomJoke: random punchline Joke\n' +
-            '!yoMama: random yoMama joke, currently 101 joke in database\n';
+            '!yoMama: random yoMama joke, currently 101 joke in database`\n\n';
     }
 
 };

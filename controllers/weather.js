@@ -37,6 +37,7 @@ module.exports = {
     },
 
     help: () => {
-        return '!weatherNow CITY: formats passed code\n';
+        return '***WEATHER***\n' +
+        '`!weatherNow CITY: formats passed code`\n\n';
     }
 };

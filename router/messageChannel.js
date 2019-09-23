@@ -36,10 +36,16 @@ const router = {
     ...(require('../controllers/math.js')).routes,
     '!help': (msg) => {
         let message = '';
-        helps.forEach(
+        helps.slice(0, helps.length / 2).forEach(
             help => message += help()
         );
-        msg.channel.send(message)
+        msg.channel.send(message);
+        message = '';
+        helps.slice(helps.length / 2, helps.length).forEach(
+            help => message += help()
+        );
+        msg.channel.send(message);
+        message = '';
     },
 };
 

@@ -6,6 +6,7 @@ const evaluate = async msg => {
         message = eval(msg.content.replace('!eval ', ''));
     } catch (e) {
         await msg.channel.send("errorcina svjetska")
+        await msg.channel.send(e.message)
     }
     await msg.channel.send(message)
 };
@@ -17,7 +18,8 @@ module.exports = {
     },
 
     help: () => {
-        return '!eval: returns result of passed javascript code\n';
+        return '***EVAL***\n' +
+        '`!eval: returns result of passed javascript code`\n\n';
     }
 
 };

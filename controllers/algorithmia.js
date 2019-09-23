@@ -53,12 +53,16 @@ const emotion = msg => {
         .then(function (response) {
                 if (response) {
                     let message = '';
-                    response.get().results[0].emotions.forEach(
-                        emotion => {
-                            message += `${emotion.label} -> ${emotion.confidence}\n`
-                        }
-                    );
-                    msg.channel.send(message)
+                    if (response.get().results[0].emotions) {
+                        response.get().results[0].emotions.forEach(
+                            emotion => {
+                                message += `${emotion.label} -> ${emotion.confidence}\n`
+                            }
+                        );
+                        msg.channel.send(message)
+                    } else {
+                        msg.channel.send("no emotions detected or some unknown error")
+                    }
                 }
             }
         );
@@ -120,9 +124,10 @@ module.exports = {
     },
 
     help: () => {
-        return '!betterImage URL: Enhances the quality of a image\n'
+        return '***AI***\n' +
+            '`!betterImage URL: Enhances the quality of a image\n'
             + '!colorize URL: Colorize black and white image\n'
             + '!emotion IMAGE_ATTACHMENT: Detect emotions from image\n'
-            + '!swapFaces FIRST_IMAGE_URL SECOND_IMAGE_URL: Attach face from second image to face on first image\n';
+            + '!swapFaces FIRST_IMAGE_URL SECOND_IMAGE_URL: Attach face from second image to face on first image`\n\n';
     }
 };

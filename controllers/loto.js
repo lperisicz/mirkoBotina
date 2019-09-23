@@ -29,6 +29,7 @@ module.exports = {
     },
 
     help: () => {
-        return '!lotto Get last drawn Eurojackpot\n';
+        return '***LOTTO***\n' +
+        '`!lotto Get last drawn Eurojackpot`\n\n';
     }
 };

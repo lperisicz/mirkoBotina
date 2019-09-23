@@ -16,7 +16,8 @@ module.exports = {
     },
 
     help: () => {
-        return '!randomIdea: returns random startup idea\n';
+        return '***IDEA***\n' +
+        '`!randomIdea: returns random startup idea`\n\n';
     }
 
 };

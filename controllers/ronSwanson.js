@@ -31,7 +31,8 @@ module.exports = {
     },
 
     help: () => {
-        return '!ronQuote: Random Parks and Recreation\'s Ron show quote\n';
+        return '***RON SWANSON***\n' +
+        '`!ronQuote: Random Parks and Recreation\'s Ron show quote\n\n`';
     }
 
 };

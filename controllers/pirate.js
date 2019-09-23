@@ -32,7 +32,8 @@ module.exports = {
     },
 
     help: () => {
-        return '!pirate MSG: Returns pirated msg\n';
+        return '***PIRATES*** \n' +
+        '`!pirate MSG: Returns pirated msg`\n\n';
     }
 
 };

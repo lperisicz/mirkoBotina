@@ -1,7 +1,7 @@
 module.exports = {
 
     routes: {
-        '!alo': msg => (require('./random.js')).alo(msg),
+        '!alo': msg => msg.reply('metnem ti ga malo!'),
 
         '!mirkoJesiZiv': (msg) => msg.channel.send('Yaass!'),
 
@@ -11,7 +11,7 @@ module.exports = {
 
         '!mirkoJeboteKemlKejs': (msg) => msg.channel.send("Jebo ga ti aj upisi !help"),
 
-        '!mirko': (msg) => msg.reply("Recite kolega"),
+        '!mirko': (msg) => msg.reply("Fuckception"),
 
         '!dajSeOdluciViseJeboGaJa': (msg) => msg.reply("A tu sam kolega jebo ga lebac"),
 
@@ -19,12 +19,13 @@ module.exports = {
     },
 
     help: () => {
-        return '!mirkoJesiZiv: check if Mirko is online\n' +
+        return '***RANDOM ACTIONS***\n' +
+        '`!mirkoJesiZiv: check if Mirko is online\n' +
         '!dajGaDajGa: special feature that returns special Mirko\'s song\n' +
         '!mirkojebotekamelkejs: The one and only MirkoLint rules \n' +
         '!mirko: Ofanzivno defanzivni odgovor od mirkeca\n' +
         '!dajSeOdluciViseJeboGaJa: Ofanzivno defanzivni odgovor od mirkeca broj dva\n' +
-        '!sve: A jeeebiga ako je sve onda je sve\n'
+        '!sve: A jeeebiga ako je sve onda je sve`\n\n'
     }
 
 };

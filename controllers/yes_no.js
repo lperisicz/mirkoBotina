@@ -19,9 +19,10 @@ module.exports = {
     },
 
     help: () => {
-        return '!yes: return random gif with yes \n' +
+        return '***YES / NO / MAYBE***\n' +
+        '`!yes: return random gif with yes \n' +
         '!no: return random gif with no\n' +
-        '!maybe: return random gif with maybe\n'
+        '!maybe: return random gif with maybe`\n\n'
     }
 
 };

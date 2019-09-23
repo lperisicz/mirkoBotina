@@ -166,12 +166,13 @@ module.exports = {
     },
 
     help: () => {
-        return '!randomMeme ?SUBREDDIT: random meme generator\n' +
+        return '**MEMES & GIFS**:\n' +
+            '`!randomMeme ?SUBREDDIT: random meme generator\n' +
             '!randomGif ?SUBREDDIT ?LIMIT ?restart: random gif generator\n' +
             '!gif KEYWOARD search tenor for gif with \n' +
             '!memeStats get random subreddit meme chat search stats \n' +
             '!memeBois get meme authors pie chart stats \n' +
-            '!gifStats get gif search authors pie chart stats \n'
+            '!gifStats get gif search authors pie chart stats `\n\n'
     }
 
 };

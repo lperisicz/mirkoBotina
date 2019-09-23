@@ -18,6 +18,7 @@ module.exports = {
     },
 
     help: () => {
-        return '!insult ?name: insult someone\n';
+        return '***INSULT***\n' +
+        '`!insult ?name: insult someone`\n\n';
     }
 };

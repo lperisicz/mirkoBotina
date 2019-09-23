@@ -29,6 +29,7 @@ module.exports = {
     },
 
     help: () => {
-        return '!zrnceMudrosti: random advice\n';
+        return '***ADVICE***\n' +
+        '`!zrnceMudrosti: random advice`\n\n';
     }
 };
