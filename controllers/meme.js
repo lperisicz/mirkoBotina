@@ -29,7 +29,7 @@ const router = {
                                     url: objData.url
                                 }
                             }
-                        })
+                        });
                         insertSubreddit(msg, objData.url);
                     } catch (e) {
                         msg.channel.send('SERVER ERROR')

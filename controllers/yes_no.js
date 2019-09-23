@@ -11,7 +11,13 @@ module.exports = {
         let answer = msg.content.replace("!", "");
         axios.post(`http://yesno.wtf/api/?force=${answer}`, {})
             .then((res) => {
-                msg.channel.send(res.data.image)
+                msg.channel.send({
+                    embed: {
+                        image: {
+                            url: res.data.image
+                        }
+                    }
+                })
             })
             .catch((error) => {
                 console.error(error)
