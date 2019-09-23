@@ -3,6 +3,8 @@ const axios = require('axios');
 const subredditStats = (require('../database/reddit.js')).getSubredditStats;
 const memeBois = (require('../database/reddit.js')).memster;
 const insertSubreddit = (require('../database/reddit.js')).insertSubreddit;
+const insertGif = (require('../database/tenor.js')).insertGif;
+const gifStats = (require('../database/tenor.js')).gifStats;
 let after = '';
 let afters = {};
 let limit = 50;
@@ -101,6 +103,7 @@ const getRandomGif = msg => {
                                                     }
                                                 }
                                             });
+                                            insertGif(msg, post.data.preview.images[0].variants.gif.source.url);
                                             after = res.data.data.children[res.data.data.children.length - 1].data.name;
                                             afters[subreddit] = after;
                                             console.log(afters)
@@ -142,6 +145,7 @@ const gif = msg => {
                         }
                     }
                 });
+                insertGif(msg, url);
             }
         }
     ).catch((error) => {
@@ -158,6 +162,7 @@ module.exports = {
         '!gif': msg => gif(msg),
         '!memeStats': msg => subredditStats(msg),
         '!memeBois': msg => memeBois(msg),
+        '!gifStats': msg => gifStats(msg),
     },
 
     help: () => {
@@ -165,7 +170,8 @@ module.exports = {
             '!randomGif ?SUBREDDIT ?LIMIT ?restart: random gif generator\n' +
             '!gif KEYWOARD search tenor for gif with \n' +
             '!memeStats get random subreddit meme chat search stats \n' +
-            '!memeBois get meme authors pie chart stats \n'
+            '!memeBois get meme authors pie chart stats \n' +
+            '!gifStats get gif search authors pie chart stats \n'
     }
 
 };

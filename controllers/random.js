@@ -9,6 +9,8 @@ module.exports = {
 
         '!mirkojebotekamelkejs': (msg) => msg.channel.send("Jebo ga ti aj upisi !help"),
 
+        '!mirkoJeboteKemlKejs': (msg) => msg.channel.send("Jebo ga ti aj upisi !help"),
+
         '!mirko': (msg) => msg.reply("Recite kolega"),
 
         '!dajSeOdluciViseJeboGaJa': (msg) => msg.reply("A tu sam kolega jebo ga lebac"),

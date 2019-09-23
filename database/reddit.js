@@ -7,8 +7,10 @@ module.exports = {
         client.query(query, (err, res) => {
             console.log(err ? err.stack : res.rows);
             if (!err) {
+                let count = 0;
+                res.rows.forEach(row => count += parseInt(row.count));
                 let response = `https://quickchart.io/chart?backgroundColor=white&c={type:\'pie\',data:{labels:[`;
-                response += res.rows.map(row => {return `\'${row.subreddit + ` ${`${Math.floor(row.count * 100 / res.rows.length)} %`}`}\'`}).join(',');
+                response += res.rows.map(row => {return `\'${row.subreddit + ` ${`${Math.floor(row.count * 100 / count)} %`}`}\'`}).join(',');
                 response += `], datasets:[{data:[${res.rows.map(row => {return row.count})}]}]}}`;
                 if (!err) {
                     msg.channel.send({
@@ -43,8 +45,10 @@ module.exports = {
         client.query(query, (err, res) => {
             console.log(err ? err.stack : res.rows);
             if (!err) {
+                let count = 0;
+                res.rows.forEach(row => count += parseInt(row.count));
                 let response = `https://quickchart.io/chart?backgroundColor=white&c={type:\'pie\',data:{labels:[`;
-                response += res.rows.map(row => {return `\'${row.author + ` ${`${Math.floor(row.count * 100 / res.rows.length)} %`}`}\'`}).join(',');
+                response += res.rows.map(row => {return `\'${row.author + ` ${`${Math.floor(row.count * 100 / count)} %`}`}\'`}).join(',');
                 response += `], datasets:[{data:[${res.rows.map(row => {return row.count})}]}]}}`;
                 if (!err) {
                     msg.channel.send({
