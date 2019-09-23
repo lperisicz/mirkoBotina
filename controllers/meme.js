@@ -18,19 +18,21 @@ const router = {
                 resp.on('data', (chunk) => {
                     data += chunk;
                 });
-                resp.on('end', () => {
+                resp.on('end', async () => {
                     try {
                         let objData = JSON.parse(data);
                         console.log(objData);
+
                         msg.channel.send({
                             embed: {
                                 title: objData.title,
                                 image: {
                                     url: objData.url
-                                }
+                                },
+                                color: await require('../helpers/color').extractColor(objData.url)
                             }
                         });
-                        insertSubreddit(msg, objData.url);
+                        await insertSubreddit(msg, objData.url);
                     } catch (e) {
                         msg.channel.send('SERVER ERROR')
                     }
@@ -87,7 +89,7 @@ const getRandomGif = msg => {
     }).then((res) => {
             console.log(res);
             res.data.data.children.forEach(
-                post => {
+                async post => {
                     if (!found) {
                         if (post.data.preview) {
                             if (post.data.preview.images[0]) {
@@ -100,10 +102,11 @@ const getRandomGif = msg => {
                                                     title: post.data.title,
                                                     image: {
                                                         url: post.data.preview.images[0].variants.gif.source.url
-                                                    }
+                                                    },
+                                                    color: await require('../helpers/color').extractColor(post.data.preview.images[0].variants.gif.source.url)
                                                 }
                                             });
-                                            insertGif(msg, post.data.preview.images[0].variants.gif.source.url);
+                                            await insertGif(msg, post.data.preview.images[0].variants.gif.source.url);
                                             after = res.data.data.children[res.data.data.children.length - 1].data.name;
                                             afters[subreddit] = after;
                                             console.log(afters)
@@ -134,7 +137,7 @@ const gif = msg => {
             q: key,
             key: process.env.TENOR
         }
-    }).then((res) => {
+    }).then(async (res) => {
             console.log(res);
             if (res.data && res.data.results) {
                 let url = res.data.results[Math.floor(Math.random() * res.data.results.length)].media[0].gif.url;
@@ -142,10 +145,11 @@ const gif = msg => {
                     embed: {
                         image: {
                             url: url
-                        }
+                        },
+                        color: await require('../helpers/color').extractColor(url)
                     }
                 });
-                insertGif(msg, url);
+                await insertGif(msg, url);
             }
         }
     ).catch((error) => {

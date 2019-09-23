@@ -10,12 +10,13 @@ module.exports = {
         const axios = require('axios');
         let answer = msg.content.replace("!", "");
         axios.post(`http://yesno.wtf/api/?force=${answer}`, {})
-            .then((res) => {
+            .then(async (res) => {
                 msg.channel.send({
                     embed: {
                         image: {
                             url: res.data.image
-                        }
+                        },
+                        color: await require('../helpers/color').extractColor(res.data.image)
                     }
                 })
             })

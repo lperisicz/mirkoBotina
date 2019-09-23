@@ -16,7 +16,7 @@ module.exports = {
         const client = require('../database/setup.js').getClient();
         let query = `SELECT COUNT(id) as count, author FROM random_gif_keywords GROUP BY(author) ORDER BY(COUNT(id)) DESC LIMIT 10`;
 
-        client.query(query, (err, res) => {
+        client.query(query,async (err, res) => {
             console.log(err ? err.stack : res.rows);
             if (!err) {
                 let count = 0;
@@ -30,7 +30,8 @@ module.exports = {
                             title: 'Most gif searches:',
                             image: {
                                 url: encodeURI(response)
-                            }
+                            },
+                            color: await require('../helpers/color').extractColor(encodeURI(response))
                         }
                     });
                 } else {

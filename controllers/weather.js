@@ -8,7 +8,7 @@ const getWeather = msg => {
             units: 'metric'
         }
     })
-        .then((res) => {
+        .then(async (res) => {
             msg.channel.send({
                 embed: {
                     title: res.data.name,
@@ -19,8 +19,9 @@ const getWeather = msg => {
                         "\n```",
                     thumbnail: {
                         // text: '',
-                        url: `\nhttp://openweathermap.org/img/wn/${res.data.weather[0].icon}@2x.png\n`
-                    }
+                        url: `http://openweathermap.org/img/wn/${res.data.weather[0].icon}@2x.png`
+                    },
+                    color: await require('../helpers/color').extractColor(`http://openweathermap.org/img/wn/${res.data.weather[0].icon}@2x.png`)
                 }
             })
         })

@@ -1,7 +1,7 @@
 const axios = require('axios');
 const getLotto = msg => {
     axios.get(`https://www.lottoland.com/api/drawings/euroJackpot`, {})
-        .then((res) => {
+        .then(async (res) => {
             let numbers = '';
             numbers += res.data.last.numbers.join(", ");
             numbers += ' | ';
@@ -12,7 +12,8 @@ const getLotto = msg => {
                     description: numbers,
                     thumbnail: {
                         url: `https://cdn.imgbin.com/23/5/12/imgbin-eurojackpot-once-logo-progressive-jackpot-brand-others-TEucLQyXr0ZP8gJyXGxpTPEcu.jpg`
-                    }
+                    },
+                    color: await require('../helpers/color').extractColor(`https://cdn.imgbin.com/23/5/12/imgbin-eurojackpot-once-logo-progressive-jackpot-brand-others-TEucLQyXr0ZP8gJyXGxpTPEcu.jpg`)
                 }
             })
         })

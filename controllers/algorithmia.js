@@ -79,9 +79,9 @@ const swapFaces = msg => {
 
     client.algo("dlib/FaceDetection/0.2.1?timeout=300") // timeout is optional
         .pipe(input)
-        .then(function (response) {
+        .then(async function (response) {
             console.log(response.get());
-            swapFaceCanvases(response.get().images, msg)
+            await swapFaceCanvases(response.get().images, msg)
         });
 };
 
