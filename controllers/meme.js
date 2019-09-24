@@ -198,6 +198,38 @@ const spongebob = msg => {
     });
 };
 
+const smart = msg => {
+    //https://api.imgflip.com/caption_image?template_id=102156234&text0=Sample text&username=CorhenoBofano&password=_uCGn8n3qX9Mgte
+    let key = msg.content.replace('!smart ', '');
+    axios.post(`https://api.imgflip.com/caption_image`, {},{
+        params: {
+            template_id: 89370399,
+            username: 'CorhenoBofano',
+            password: '_uCGn8n3qX9Mgte',
+            'boxes[0][text]': key
+        }
+    }).then(async (res) => {
+            console.log(res);
+            if (res.data && res.data.data) {
+                let url = encodeURI(res.data.data.url);
+                msg.channel.send({
+                    embed: {
+                        title: msg.author.username,
+                        image: {
+                            url: url
+                        },
+                        color: await require('../helpers/color').extractColor(url)
+                    }
+                });
+                await insertGif(msg, url);
+            }
+        }
+    ).catch((error) => {
+        console.error(error);
+        msg.channel.send(error.message)
+    });
+};
+
 module.exports = {
 
     routes: {
@@ -208,6 +240,7 @@ module.exports = {
         '!memeBois': msg => memeBois(msg),
         '!gifStats': msg => gifStats(msg),
         '!spongebob': msg => spongebob(msg),
+        '!smart': msg => smart(msg),
     },
 
     help: () => {
@@ -218,6 +251,7 @@ module.exports = {
             '!memeStats get random subreddit meme chat search stats \n' +
             '!memeBois get meme authors pie chart stats \n' +
             '!gifStats get gif search authors pie chart stats\n' +
+            '!smart ?TEXT gif with smart guy meme\n' +
             '!spongebob ?TEXT return mocking spongebob meme with passed text `\n\n'
     }
 
