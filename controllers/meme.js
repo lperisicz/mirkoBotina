@@ -158,6 +158,45 @@ const gif = msg => {
     });
 };
 
+const spongebob = msg => {
+    function setCharAt(str,index,chr) {
+        if(index > str.length-1) return str;
+        return str.substr(0,index) + chr + str.substr(index+1);
+    }
+    //https://api.imgflip.com/caption_image?template_id=102156234&text0=Sample text&username=CorhenoBofano&password=_uCGn8n3qX9Mgte
+    let key = msg.content.replace('!spongebob ', '');
+    for (let i = 0; i < key.length; i++) {
+        key = setCharAt(key,i, (Math.floor(Math.random() * 2) > 0) ? key.charAt(i).toUpperCase() : key.charAt(i).toLowerCase())
+    }
+    axios.post(`https://api.imgflip.com/caption_image`, {},{
+        params: {
+            template_id: 102156234,
+            username: 'CorhenoBofano',
+            password: '_uCGn8n3qX9Mgte',
+            'boxes[0][text]': key,
+            'boxes[0][force_caps]': false,
+        }
+    }).then(async (res) => {
+            console.log(res);
+            if (res.data && res.data.data) {
+                let url = encodeURI(res.data.data.url);
+                msg.channel.send({
+                    embed: {
+                        image: {
+                            url: url
+                        },
+                        color: await require('../helpers/color').extractColor(url)
+                    }
+                });
+                await insertGif(msg, url);
+            }
+        }
+    ).catch((error) => {
+        console.error(error);
+        msg.channel.send(error.message)
+    });
+};
+
 module.exports = {
 
     routes: {
@@ -167,6 +206,7 @@ module.exports = {
         '!memeStats': msg => subredditStats(msg),
         '!memeBois': msg => memeBois(msg),
         '!gifStats': msg => gifStats(msg),
+        '!spongebob': msg => spongebob(msg),
     },
 
     help: () => {
@@ -176,7 +216,8 @@ module.exports = {
             '!gif KEYWOARD search tenor for gif with \n' +
             '!memeStats get random subreddit meme chat search stats \n' +
             '!memeBois get meme authors pie chart stats \n' +
-            '!gifStats get gif search authors pie chart stats `\n\n'
+            '!gifStats get gif search authors pie chart stats\n' +
+            '!spongebob ?TEXT return mocking spongebob meme with passed text `\n\n'
     }
 
 };
