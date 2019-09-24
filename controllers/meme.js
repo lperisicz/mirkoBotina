@@ -230,6 +230,38 @@ const smart = msg => {
     });
 };
 
+const buttons = msg => {
+    //https://api.imgflip.com/caption_image?template_id=102156234&text0=Sample text&username=CorhenoBofano&password=_uCGn8n3qX9Mgte
+    let keys = msg.content.replace('!buttons ', '').split('|');
+    axios.post(`https://api.imgflip.com/caption_image`, {},{
+        params: {
+            template_id: 87743020,
+            username: 'CorhenoBofano',
+            password: '_uCGn8n3qX9Mgte',
+            'boxes[0][text]': keys[0],
+            'boxes[1][text]': keys[1],
+        }
+    }).then(async (res) => {
+            console.log(res);
+            if (res.data && res.data.data) {
+                let url = encodeURI(res.data.data.url);
+                msg.channel.send({
+                    embed: {
+                        title: msg.author.username,
+                        image: {
+                            url: url
+                        },
+                        color: await require('../helpers/color').extractColor(url)
+                    }
+                });
+                await insertGif(msg, url);
+            }
+        }
+    ).catch((error) => {
+        console.error(error);
+        msg.channel.send(error.message)
+    });
+};
 module.exports = {
 
     routes: {
@@ -241,6 +273,7 @@ module.exports = {
         '!gifStats': msg => gifStats(msg),
         '!spongebob': msg => spongebob(msg),
         '!smart': msg => smart(msg),
+        '!buttons': msg => buttons(msg),
     },
 
     help: () => {
@@ -252,6 +285,7 @@ module.exports = {
             '!memeBois get meme authors pie chart stats \n' +
             '!gifStats get gif search authors pie chart stats\n' +
             '!smart ?TEXT gif with smart guy meme\n' +
+            '!buttons TEXT1 | TEXT2 gif two choice buttons\n' +
             '!spongebob ?TEXT return mocking spongebob meme with passed text `\n\n'
     }
 

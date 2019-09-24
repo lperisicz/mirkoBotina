@@ -53,6 +53,7 @@ const deleteMsgKeys = [
     "!code",
     "!spongebob",
     "!smart",
+    "!buttons",
     '!swapFaces'
 ];
 
