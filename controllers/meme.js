@@ -182,6 +182,7 @@ const spongebob = msg => {
                 let url = encodeURI(res.data.data.url);
                 msg.channel.send({
                     embed: {
+                        title: msg.author.username,
                         image: {
                             url: url
                         },
