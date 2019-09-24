@@ -52,6 +52,7 @@ const router = {
 const deleteMsgKeys = [
     "!code",
     "!spongebob",
+    "!smart",
     '!swapFaces'
 ];
 
