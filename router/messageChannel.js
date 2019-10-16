@@ -15,6 +15,7 @@ const helps = [
     (require('../controllers/algorithmia.js')).help,
     (require('../controllers/eval.js')).help,
     (require('../controllers/math.js')).help,
+    (require('../controllers/translate.js')).help,
 ];
 
 const router = {
@@ -34,6 +35,7 @@ const router = {
     ...(require('../controllers/algorithmia.js')).routes,
     ...(require('../controllers/eval.js')).routes,
     ...(require('../controllers/math.js')).routes,
+    ...(require('../controllers/translate.js')).routes,
     '!help': (msg) => {
         let message = '';
         helps.slice(0, helps.length / 2).forEach(
@@ -54,6 +56,7 @@ const deleteMsgKeys = [
     "!spongebob",
     "!smart",
     "!buttons",
+    "!posrbi",
     '!swapFaces'
 ];
 
@@ -62,7 +65,7 @@ module.exports = {
         let key = msg.content.split(" ");
         let action = router[key[0]];
         if (action) action(msg);
-        if (deleteMsgKeys.includes(key[0])) await msg.delete(1000)
+        if (deleteMsgKeys.includes(key[0])) await msg.delete(500)
 
     }
 };
