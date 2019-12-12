@@ -36,6 +36,7 @@ const router = {
     ...(require('../controllers/eval.js')).routes,
     ...(require('../controllers/math.js')).routes,
     ...(require('../controllers/translate.js')).routes,
+    ...(require('../controllers/keyword_stats.js')).routes,
     '!help': (msg) => {
         let message = '';
         helps.slice(0, helps.length / 2).forEach(
